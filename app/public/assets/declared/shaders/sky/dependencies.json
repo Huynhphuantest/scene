@@ -1,0 +1,8 @@
+{
+    "vert": [
+    ],
+    "frag": [
+        "snoise",
+        "pnoise"
+    ]
+}

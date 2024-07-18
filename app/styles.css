@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body, html {
+    width:100vw;
+    height:100vh;
+}
+#console {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:fit-content;
+    height:45vh;
+    z-index: 2;
+    font-family:'Courier New', Courier, monospace;
+    color:white;
+    font-size:0.65rem;
+    opacity:0.7;
+    filter:brightness(320%);
+    overflow-y: scroll;
+    background:#1c1c20;
+}
+#console > * {
+    margin-left:0.5rem;
+    margin-right:0.5rem;
+    margin-top:0.1rem;
+    margin-bottom:0.1rem;
+}

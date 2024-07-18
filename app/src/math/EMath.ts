@@ -1,0 +1,5 @@
+export * as NOISE from './noise';
+
+export function clamp(value:number, min:number, max:number) {
+    return Math.min(Math.max(value, min), max);
+}
