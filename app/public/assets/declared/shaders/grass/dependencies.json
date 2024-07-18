@@ -1,0 +1,9 @@
+{
+    "vert": [
+        "pnoise",
+        "rotation"
+    ],
+    "frag": [
+        "pnoise"
+    ]
+}
