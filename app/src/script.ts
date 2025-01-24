@@ -386,5 +386,6 @@ getShader('water').then(shader => {
         geometry,
         material
     );
-    //scene.add(mesh);
+    scene.add(mesh);
+    scene.remove(mesh);
 });
