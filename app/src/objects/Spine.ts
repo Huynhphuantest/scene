@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { clamp } from '../math/EMath';
 export class Spine extends THREE.Object3D {
     radii:number[];
     head:THREE.Mesh;
@@ -52,7 +51,7 @@ export class Spine extends THREE.Object3D {
             if(i > 1) {
                 const diff = Math.abs(angle[i - 2].angleTo(angle[i - 1]));
                 if(diff < this.angleConstraint) continue;
-                const rot = 
+                const rot = 0;
                 const quat = new THREE.Quaternion();
                 quat.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rot);
                 const dir = new THREE.Vector3(1, 0, 0);
