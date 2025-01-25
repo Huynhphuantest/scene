@@ -43,7 +43,7 @@ render.composer.addPass(new EffectPass(camera,
         sharpness: 1.0
     }),
     new BloomEffect({
-        luminanceThreshold:0.6,
+        luminanceThreshold:0.7,
         radius:5,
         intensity: 1.5
     }),
