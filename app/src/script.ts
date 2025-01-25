@@ -214,8 +214,8 @@ getShader('star').then(shader => {
     for(let i = 0; i < CONFIG.GROUND.size; i++) {
         for(let j = 0; j < CONFIG.GROUND.size; j++) {
             const index = (i * CONFIG.GROUND.size + j) * 3;
-            const x = i;
-            const z = j;
+            const x = i - CONFIG.GROUND.size / 2;
+            const z = j - CONFIG.GROUND.size / 2;
             vertices[index  ] = x;
             vertices[index+1] = groundHeight(x, z);
             vertices[index+2] = z;
@@ -279,8 +279,8 @@ getShader('grass').then(shader => {
     for(let i = 0; i < CONFIG.GRASS.amount; i++) {
         const size = 0.1;
         const randomScale = 2;
-        const x = i % bladePerRow * size + (Math.random() * size * randomScale);
-        const z = Math.floor(i / bladePerRow) * size + (Math.random() * size * randomScale);
+        const x = (i % bladePerRow * size + (Math.random() * size * randomScale)) - (bladePerRow*size)/2;
+        const z = (Math.floor(i / bladePerRow) * size + (Math.random() * size * randomScale)) - (bladePerRow*size)/2;
         const matrix = new THREE.Matrix4();
         matrix.makeTranslation(new THREE.Vector3(x, groundHeight(x, z) ,z));
         matrix.scale(new THREE.Vector3(1, CONFIG.GRASS.height + Math.random() * CONFIG.GRASS.height * CONFIG.GRASS.heightRandom, 1))
