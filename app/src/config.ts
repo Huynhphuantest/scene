@@ -59,14 +59,15 @@ export const GRASS = {
 
 // Confusing naming ngl
 export const STAR = {
-    width: 10, // %
+    width: 10, // % the width of the star pointy thingy btw
     resolution: 128, // You can't see it from far away anyways
-    amount: 6000,
-    minSize: 900,
-    maxSize: 1300,
-    speed: 1,
+    amount: 32000,
+    minSize: 500,
+    maxSize: 3300,
+    speed: 0.05,
     spread: 100, // CAMERA.far - CAMERA.near, // - subtract distance
-    distance: 100
+    distance: 100,
+    distributionSteepness: 6,
 }
 
 export const WATER = {

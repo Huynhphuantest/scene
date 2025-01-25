@@ -43,9 +43,9 @@ render.composer.addPass(new EffectPass(camera,
         sharpness: 1.0
     }),
     new BloomEffect({
-        luminanceThreshold:0.7,
-        radius:1,
-        intensity: 5
+        luminanceThreshold:0.6,
+        radius:5,
+        intensity: 1.5
     }),
     new SMAAEffect({
         edgeDetectionMode:EdgeDetectionMode.DEPTH
@@ -91,7 +91,8 @@ const skyMap = skyCubeRenderTarget.texture;
     const spread = 0;
     const srand = 0.1;
     const rand = 19343684;
-    for(let i = 0; i< 1 ; i++) {
+    const amount = 0;
+    for(let i = 0; i < amount; i++) {
         const fish = new Spine({
             angleConstraint:Math.PI/2
         }, [2, 1.8, 1.5, 1.2, 1, 0.6]);
@@ -148,7 +149,6 @@ getShader('sky').then(shader => {
 
 //Stars
 getShader('star').then(shader => {
-
     const positions = new Float32Array(CONFIG.STAR.amount * 3);
     const sizes = new Float32Array(CONFIG.STAR.amount);
     const colors = new Float32Array(CONFIG.STAR.amount * 3);
@@ -172,7 +172,7 @@ getShader('star').then(shader => {
         positions[i * 3 + 1] = pos.y;
         positions[i * 3 + 2] = pos.z;
 
-        sizes[i] = Math.random() * (CONFIG.STAR.maxSize - CONFIG.STAR.minSize) + CONFIG.STAR.minSize;
+        sizes[i] = Math.pow(1 - Math.random(), CONFIG.STAR.distributionSteepness) * (CONFIG.STAR.maxSize - CONFIG.STAR.minSize) + CONFIG.STAR.minSize;
 
         color.setHSL(Math.random(), 1.0, 0.85)
         colors[i * 3    ] = color.r;
@@ -196,9 +196,12 @@ getShader('star').then(shader => {
                         CONFIG.STAR.resolution,
                         "white"
                     )
-                }
+                },
+                uTime: render.uniforms.time,
+                uSpeed: { value: CONFIG.STAR.speed },
             },
             transparent:true,
+            depthWrite:false
         })
     );
     scene.add(mesh);
