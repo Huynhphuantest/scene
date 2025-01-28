@@ -4,6 +4,6 @@
         "rotation"
     ],
     "frag": [
-        "pnoise"
+        "rand"
     ]
 }

@@ -47,7 +47,7 @@ export const GRASS = {
     heightRandom: 0.5,
     amount: fieldSize,
     detail: 5,
-    width: 0.1,
+    width: 0.08,
     uniforms: {
         WIND_SIZE: 1 / 20, // inverse
         WIND_SPEED: 0.2,
@@ -60,14 +60,14 @@ export const GRASS = {
 // Confusing naming ngl
 export const STAR = {
     width: 5, // % the width of the star pointy thingy btw
-    resolution: 64, // You can't see it from far away anyways
-    amount: 12800,
+    resolution: 32, // You can't see it from far away anyways
+    amount: 70000,
     minSize: 1150,
     maxSize: 12300,
-    speed: 0.025,
+    speed: 0.01,
     spread: 200, // CAMERA.far - CAMERA.near, // - subtract distance
     distance: 100,
-    distributionSteepness: 20,
+    distributionSteepness: 40,
 }
 
 export const WATER = {

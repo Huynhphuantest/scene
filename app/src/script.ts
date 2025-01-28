@@ -44,7 +44,7 @@ render.composer.addPass(new EffectPass(camera,
     }),
     new BloomEffect({
         luminanceThreshold:0.7,
-        radius:5,
+        radius:2,
         intensity: 2
     }),
     new SMAAEffect({
@@ -270,7 +270,10 @@ getShader('grass').then(shader => {
         })+shader.vert,
         fragmentShader:shader.frag,
         uniforms: {
-            uTime
+            uTime,
+            uID: {
+                value:Math.random() * Number.MAX_SAFE_INTEGER
+            }
         },
     });
     const mesh = new THREE.InstancedMesh(
