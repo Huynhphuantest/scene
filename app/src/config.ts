@@ -61,13 +61,13 @@ export const GRASS = {
 export const STAR = {
     width: 5, // % the width of the star pointy thingy btw
     resolution: 64, // You can't see it from far away anyways
-    amount: 25600,
+    amount: 12800,
     minSize: 1150,
     maxSize: 12300,
     speed: 0.025,
     spread: 200, // CAMERA.far - CAMERA.near, // - subtract distance
     distance: 100,
-    distributionSteepness: 100,
+    distributionSteepness: 20,
 }
 
 export const WATER = {
