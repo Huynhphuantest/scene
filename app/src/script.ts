@@ -45,7 +45,7 @@ render.composer.addPass(new EffectPass(camera,
     new BloomEffect({
         luminanceThreshold:0.7,
         radius:5,
-        intensity: 1.5
+        intensity: 2
     }),
     new SMAAEffect({
         edgeDetectionMode:EdgeDetectionMode.DEPTH
@@ -135,7 +135,10 @@ getShader('sky').then(shader => {
     const skyMaterial = new THREE.ShaderMaterial({
         vertexShader:shader.vert,
         fragmentShader:shader.frag,
-        side:THREE.BackSide
+        side:THREE.BackSide,
+        uniforms: {
+            uTime: render.uniforms.time
+        }
     });
     const sky = new THREE.Mesh(
         skyGeometry,
@@ -305,7 +308,7 @@ getShader('blackhole').then(shader => {
     const blackhole = new THREE.Mesh(blackholeGeometry, blackholeMaterial);
     blackhole.position.copy(blackholePosition);
     blackhole.lookAt(camera.position);
-    scene.add(blackhole);
+    //scene.add(blackhole);
 });
 
 //Water

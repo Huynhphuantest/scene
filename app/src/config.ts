@@ -35,39 +35,39 @@ export const RENDERER:THREE.WebGLRendererParameters = {
 	stencil: false,
 	depth: false
 }
-
+const fieldSize = 100000;
 export const GROUND = {
-    size: Math.floor(Math.sqrt(Math.sqrt(1000000))) + 1,
-    detail: 30,
+    size: Math.floor(Math.sqrt(Math.sqrt(fieldSize * 10))),
+    detail: 20,
     height: 3,
-    intensity: 1/25
+    intensity: 1/30 // inverse
 }
 export const GRASS = {
     height: 1.25,
     heightRandom: 0.5,
-    amount: 100000,
+    amount: fieldSize,
     detail: 5,
     width: 0.1,
     uniforms: {
-        WIND_SIZE: 1 / 10,
-        WIND_SPEED: 0.3,
-        CURVE_AMOUNT_MAX: 0.8,
+        WIND_SIZE: 1 / 20, // inverse
+        WIND_SPEED: 0.2,
+        CURVE_AMOUNT_MAX: 1.0,
         WIND_DIRECTION_CHANGE_SPEED: 0.01,
-        WIND_DIRECTION_SIZE: 0.1
+        WIND_DIRECTION_SIZE: 1.0
     }
 }
 
 // Confusing naming ngl
 export const STAR = {
-    width: 10, // % the width of the star pointy thingy btw
-    resolution: 128, // You can't see it from far away anyways
-    amount: 32000,
-    minSize: 500,
-    maxSize: 3300,
-    speed: 0.05,
-    spread: 100, // CAMERA.far - CAMERA.near, // - subtract distance
+    width: 5, // % the width of the star pointy thingy btw
+    resolution: 64, // You can't see it from far away anyways
+    amount: 25600,
+    minSize: 1150,
+    maxSize: 12300,
+    speed: 0.025,
+    spread: 200, // CAMERA.far - CAMERA.near, // - subtract distance
     distance: 100,
-    distributionSteepness: 6,
+    distributionSteepness: 100,
 }
 
 export const WATER = {

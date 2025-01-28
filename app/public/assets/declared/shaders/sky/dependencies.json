@@ -2,7 +2,6 @@
     "vert": [
     ],
     "frag": [
-        "snoise",
         "pnoise"
     ]
 }
