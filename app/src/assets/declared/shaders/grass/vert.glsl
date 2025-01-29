@@ -1,4 +1,3 @@
-varying vec3 vUv;
 varying float height;
 uniform float uTime;
 
@@ -19,9 +18,6 @@ void main() {
         WIND_NOISE = pnoise(worldPos.xz * WIND_SIZE + uTime * WIND_SPEED, REP);
         WIND_DIRECTION_CHANGE = pnoise(worldPos.xz * WIND_DIRECTION_SIZE + uTime * WIND_DIRECTION_CHANGE_SPEED, REP);
     }
-
-    vUv = worldPos;
-
 
     // 0.0 to 1.0
     height = position.y;

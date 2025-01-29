@@ -2,7 +2,7 @@ import { Effect, EffectAttribute } from 'postprocessing';
 import { Uniform, Vector2 } from 'three';
 // @ts-expect-error
 import fragmentShader from './sharpness.glsl?raw';
-import { SCREEN } from '../../../../../src/config';
+import { SCREEN } from '../../../../config';
 
 export class SharpnessEffect extends Effect {
   resolution:Vector2;

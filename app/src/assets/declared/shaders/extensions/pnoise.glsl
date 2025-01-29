@@ -1,7 +1,8 @@
-float cnoise(vec2 P) {
+float pnoise(vec2 P, vec2 rep) {
     vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
     vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
-    Pi = mod289(Pi); // To avoid truncation effects in permutation
+    Pi = mod(Pi, rep.xyxy); // To create noise with explicit period
+    Pi = mod289(Pi);        // To avoid truncation effects in permutation
     vec4 ix = Pi.xzxz;
     vec4 iy = Pi.yyww;
     vec4 fx = Pf.xzxz;
@@ -33,12 +34,12 @@ float cnoise(vec2 P) {
     vec2 fade_xy = quintic(Pf.xy);
     vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
     float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
-    return 2.3 * n_xy;
+    return n_xy; // Normalize to [0, 1]
 }
 
-float cnoise(vec3 P) {
-    vec3 Pi0 = floor(P); // Integer part for indexing
-    vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
+float pnoise(vec3 P, vec3 rep) {
+    vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
+    vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
     Pi0 = mod289(Pi0);
     Pi1 = mod289(Pi1);
     vec3 Pf0 = fract(P); // Fractional part for interpolation
@@ -101,12 +102,12 @@ float cnoise(vec3 P) {
     vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
     vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
     float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
-    return 2.2 * n_xyz;
+    return fract(n_xyz * 2.3);
 }
 
-float cnoise(vec4 P) {
-    vec4 Pi0 = floor(P); // Integer part for indexing
-    vec4 Pi1 = Pi0 + 1.0; // Integer part + 1
+float pnoise(vec4 P, vec4 rep) {
+    vec4 Pi0 = mod(floor(P), rep); // Integer part modulo rep
+    vec4 Pi1 = mod(Pi0 + 1.0, rep); // Integer part + 1 mod rep
     Pi0 = mod289(Pi0);
     Pi1 = mod289(Pi1);
     vec4 Pf0 = fract(P); // Fractional part for interpolation
@@ -234,5 +235,5 @@ float cnoise(vec4 P) {
     vec4 n_zw = mix(n_0w, n_1w, fade_xyzw.z);
     vec2 n_yzw = mix(n_zw.xy, n_zw.zw, fade_xyzw.y);
     float n_xyzw = mix(n_yzw.x, n_yzw.y, fade_xyzw.x);
-    return 2.2 * n_xyzw;
+    return fract(n_xyzw * 2.4);
 }

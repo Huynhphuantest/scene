@@ -1,7 +1,7 @@
 import { log } from "./logger.ts";
 
 console.log = log;
-console.error = (datas => {
+/*console.error = (datas => {
     const err = new Error();
     err.message = datas;
     console.log(err);
@@ -15,3 +15,4 @@ window.addEventListener("error", errorEvent => {
     err.location = `${fileName} | ${line}`;
     console.log(err);
 });
+*/

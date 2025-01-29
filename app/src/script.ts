@@ -3,12 +3,12 @@ import * as CONFIG from './config';
 import { Render } from "./render";
 import { defineVairables, getShader } from './shader';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { createGrassBladeGeometry3D } from '../public/assets/procedural/model/grass';
+import { createGrassBladeGeometry3D } from './assets/procedural/model/grass';
 import { NOISE } from './math/EMath';
-import { createStarTexture } from '../public/assets/procedural/texture/star';
-import { BloomEffect, EdgeDetectionMode, EffectPass, SMAAEffect } from 'postprocessing';
+import { createStarTexture } from './assets/procedural/texture/star';
+import { BlendFunction, BloomEffect, EdgeDetectionMode, EffectPass, FXAAEffect, SMAAEffect } from 'postprocessing';
 
-import { SharpnessEffect } from '../public/assets/declared/shaders/postprocessing/hpatEffects';
+import { SharpnessEffect } from './assets/declared/shaders/postprocessing/hpatEffects';
 import { Spine } from './objects/Spine';
 
 const callbacks:(() => void)[] = [];
@@ -39,17 +39,37 @@ axis.position.y = 1;
 scene.add(axis);
 
 render.composer.addPass(new EffectPass(camera,
+    (() => {
+        const effect = new SMAAEffect({
+            edgeDetectionMode: EdgeDetectionMode.DEPTH
+        });
+        const size = new THREE.Vector2();
+        render.renderer.getSize(size);
+        const ratio = render.renderer.getPixelRatio();
+        effect.setSize(
+            size.x * ratio,
+            size.y * ratio,
+        );
+        
+        return effect;
+    })(),
+    (() => {
+        const effect = new FXAAEffect({
+            blendFunction: BlendFunction.NORMAL,
+        });
+        effect.minEdgeThreshold = 0.05;
+        effect.maxEdgeThreshold = 0.25
+        return effect;
+    })(),
     new SharpnessEffect({
         sharpness: 1.0
     }),
     new BloomEffect({
+        blendFunction: BlendFunction.NORMAL,
         luminanceThreshold:0.7,
-        radius:2,
-        intensity: 2
+        radius:0.5,
+        intensity: 1
     }),
-    new SMAAEffect({
-        edgeDetectionMode:EdgeDetectionMode.DEPTH
-    })
 ));
     
 const control = new OrbitControls(camera, document.body);
@@ -270,10 +290,7 @@ getShader('grass').then(shader => {
         })+shader.vert,
         fragmentShader:shader.frag,
         uniforms: {
-            uTime,
-            uID: {
-                value:Math.random() * Number.MAX_SAFE_INTEGER
-            }
+            uTime
         },
     });
     const mesh = new THREE.InstancedMesh(
@@ -397,4 +414,4 @@ getShader('water').then(shader => {
     );
     scene.add(mesh);
     scene.remove(mesh);
-});
+}); 

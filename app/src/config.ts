@@ -40,11 +40,11 @@ export const GROUND = {
     size: Math.floor(Math.sqrt(Math.sqrt(fieldSize * 10))),
     detail: 20,
     height: 3,
-    intensity: 1/30 // inverse
+    intensity: 1/10 // inverse
 }
 export const GRASS = {
     height: 1.25,
-    heightRandom: 0.5,
+    heightRandom: 0.75,
     amount: fieldSize,
     detail: 5,
     width: 0.08,

@@ -19,6 +19,10 @@ vec2  quintic(vec2 v)  { return v*v*v*(v*(v*6.0-15.0)+10.0); }
 vec3  quintic(vec3 v)  { return v*v*v*(v*(v*6.0-15.0)+10.0); }
 vec4  quintic(vec4 v)  { return v*v*v*(v*(v*6.0-15.0)+10.0); }
 
+vec2 fade(vec2 t) {  return t*t*t*(t*(t*6.0-15.0)+10.0); }
+vec3 fade(vec3 t) {  return t*t*t*(t*(t*6.0-15.0)+10.0); }
+vec4 fade(vec4 t) {  return t*t*t*(t*(t*6.0-15.0)+10.0); }
+
 vec4 grad4(float j, vec4 ip) {
     const vec4 ones = vec4(1.0, 1.0, 1.0, -1.0);
     vec4 p,s;
