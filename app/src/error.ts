@@ -1,7 +1,8 @@
-import { log } from "./logger.ts";
-
+//import { log } from "./logger.ts";
+//console.log('?')
+/*
 console.log = log;
-/*console.error = (datas => {
+console.error = (datas => {
     const err = new Error();
     err.message = datas;
     console.log(err);
