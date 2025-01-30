@@ -35,7 +35,7 @@ export const RENDERER:THREE.WebGLRendererParameters = {
 	stencil: false,
 	depth: false
 }
-const fieldSize = 100000;
+const fieldSize = 50;
 export const GROUND = {
     size: Math.floor(Math.sqrt(Math.sqrt(fieldSize * 10))),
     detail: 20,
@@ -44,15 +44,35 @@ export const GROUND = {
 }
 export const GRASS = {
     height: 1.25,
-    heightRandom: 0.75,
-    amount: fieldSize,
-    detail: 5,
-    width: 0.08,
+    heightRandom: 0.5,
+    size: fieldSize,
+    intensity: 1/10, //this mean like 5 grass per unit?,
+    fieldSide: 5, //so uhh this create a field that have length and wide of field, it isnt a good name but im lazy
+    LOD: [
+        {
+            detail: 7,
+            distance: 10
+        },
+        {
+            detail: 5,
+            distance: 15
+        }, {
+            detail: 3,
+            distance: 20
+        }, {
+            detail: 2,
+            distance: 25
+        }, {
+            detail: 1,
+            distance: Infinity
+        }
+    ],
+    width: 0.09,
     uniforms: {
         WIND_SIZE: 1 / 20, // inverse
         WIND_SPEED: 0.2,
         CURVE_AMOUNT_MAX: 1.0,
-        WIND_DIRECTION_CHANGE_SPEED: 0.01,
+        WIND_DIRECTION_CHANGE_SPEED: 0.1,
         WIND_DIRECTION_SIZE: 1.0
     }
 }

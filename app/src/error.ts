@@ -1,11 +1,15 @@
-//import { log } from "./logger.ts";
-//console.log('?')
-/*
-console.log = log;
+import { log } from "./logger.ts";
+
+const oldLog = console.log;
+console.log = (...messages:string[]) => {
+    oldLog(...messages);
+    log(...messages);
+};
+const oldError = console.error;
 console.error = (datas => {
     const err = new Error();
     err.message = datas;
-    console.log(err);
+    oldError(err);
 });
 
 window.addEventListener("error", errorEvent => {
@@ -14,6 +18,5 @@ window.addEventListener("error", errorEvent => {
     const err:any = new errConstructor();
     err.message = message;
     err.location = `${fileName} | ${line}`;
-    console.log(err);
+    console.error(err);
 });
-*/

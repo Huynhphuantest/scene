@@ -10,13 +10,13 @@ void main() {
         )
     ).xyz;
 
-    vec2 REP = vec2(100000.0,100000.0);
+
     float distanceFromCam = distance(cameraPosition, worldPos);
     float WIND_NOISE = 0.0;
     float WIND_DIRECTION_CHANGE = 0.0;
-    if(distanceFromCam < 100.0) {
-        WIND_NOISE = pnoise(worldPos.xz * WIND_SIZE + uTime * WIND_SPEED, REP);
-        WIND_DIRECTION_CHANGE = pnoise(worldPos.xz * WIND_DIRECTION_SIZE + uTime * WIND_DIRECTION_CHANGE_SPEED, REP);
+    if(distanceFromCam < 50.0) {
+        WIND_NOISE = cnoise(worldPos.xz * WIND_SIZE + uTime * WIND_SPEED);
+        WIND_DIRECTION_CHANGE = cnoise(worldPos.xz * WIND_DIRECTION_SIZE + uTime * WIND_DIRECTION_CHANGE_SPEED);
     }
 
     // 0.0 to 1.0

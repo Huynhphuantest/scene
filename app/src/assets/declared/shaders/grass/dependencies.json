@@ -1,6 +1,6 @@
 {
     "vert": [
-        "pnoise",
+        "cnoise",
         "rotation"
     ],
     "frag": [
