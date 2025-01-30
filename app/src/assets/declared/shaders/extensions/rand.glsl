@@ -1,3 +1,4 @@
+
 #define RANDOM_SCALE vec4(.1031, .1030, .0973, .1099)
 
 float random(in float x) {
