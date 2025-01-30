@@ -19,7 +19,7 @@ export class Render {
             SCREEN.bounding.width,
             SCREEN.bounding.height,
         );
-        this.renderer.setPixelRatio(window.devicePixelRatio * 1);
+        this.renderer.setPixelRatio(window.devicePixelRatio * 1.5);
         SCREEN.target.appendChild(this.renderer.domElement);
         SCREEN.target.addEventListener('resize', () => {
             this.renderer.setSize(
