@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { createGrassBladeGeometry3D } from './assets/procedural/model/grass';
 import { NOISE } from './math/EMath';
 import { createStarTexture } from './assets/procedural/texture/star';
-import { BlendFunction, BloomEffect, EdgeDetectionMode, EffectPass, FXAAEffect, SMAAEffect } from 'postprocessing';
+import { BloomEffect, EdgeDetectionMode, EffectPass, FXAAEffect, SMAAEffect } from 'postprocessing';
 
 import { SharpnessEffect } from './assets/declared/shaders/postprocessing/hpatEffects';
 import { Spine } from './objects/Spine';
@@ -54,9 +54,7 @@ render.composer.addPass(new EffectPass(camera,
         return effect;
     })(),
     (() => {
-        const effect = new FXAAEffect({
-            blendFunction: BlendFunction.NORMAL,
-        });
+        const effect = new FXAAEffect({});
         effect.minEdgeThreshold = 0.05;
         effect.maxEdgeThreshold = 0.25
         return effect;
@@ -65,7 +63,6 @@ render.composer.addPass(new EffectPass(camera,
         sharpness: 1.0
     }),
     new BloomEffect({
-        blendFunction: BlendFunction.NORMAL,
         luminanceThreshold:0.7,
         radius:0.5,
         intensity: 1
