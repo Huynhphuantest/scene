@@ -35,7 +35,7 @@ async function isFileExist(path: string): Promise<boolean> {
 
 }
 async function getExtensions(name: string): Promise<Extension> {
-    const dir = '/assets/declared/shaders/extensions/' + name;
+    const dir = 'src/assets/declared/shaders/extensions/' + name;
     const code = await getGLSLFile(dir);
     let requires:string[] = await getArrayFromJSONFile(dir + '.required');
     return {
@@ -44,7 +44,7 @@ async function getExtensions(name: string): Promise<Extension> {
     }
 }
 export async function getShader(name: string): Promise<ShaderType> {
-    const dir = '/assets/declared/shaders/' + name + '/';
+    const dir = 'src/assets/declared/shaders/' + name + '/';
     const vert = await getGLSLFile(dir + "vert");
     const frag = await getGLSLFile(dir + "frag");
 
