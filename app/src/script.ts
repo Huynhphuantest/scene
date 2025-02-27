@@ -39,10 +39,6 @@ render.callback = () => {
 }
 render.animate();
 
-
-scene.add(new THREE.AxesHelper(5));
-
-
 import { init as initPass } from './scenes/pass';
 initPass();
 
@@ -50,7 +46,10 @@ import { init as initSky } from './scenes/sky';
 initSky();
 
 import { init as initStar } from './scenes/star';
-initStar();
+//initStar();
 
 import { init as initGrass } from './scenes/grass';
 initGrass();
+
+import { init as initWater } from './scenes/water';
+//initWater();

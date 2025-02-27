@@ -14,7 +14,7 @@ async function getGLSLFile(_path: string): Promise<string> {
     const path = _path + '.glsl';
     if (!isFileExist(path)) new Error('File not found. Path : ' + path);
     const file = await (await (fetch(path))).text();
-    return file;
+    return file + '\n';
 }
 async function getJSONFile(_path: string): Promise<Object> {
     const path = _path + '.json';
@@ -106,14 +106,19 @@ export async function getShader(name: string): Promise<ShaderType> {
     }
 }
 //UTILS
+type GLSLType = "Int" | "Float";
 export type GLSLVairable = {
     name:string,
-    value:any
+    value:any,
+    type?: GLSLType
 }
 export function defineVairables(...vairables:GLSLVairable[]):string {
     let code = "";
-    function toGLSLNumber(number:number):string {
-        if(Number.isInteger(number)) {
+    function toGLSLNumber(number:number, type?:GLSLType):string {
+        if(type === "Int") {
+            return `${number}`;
+        }
+        else if(Number.isInteger(number)) {
             return `${number}.0`;
         } else {
             return `${number}`;
@@ -128,8 +133,8 @@ export function defineVairables(...vairables:GLSLVairable[]):string {
                 code += `#define ${vairable.name} vec2(${toGLSLNumber(vairable.value.x)},${toGLSLNumber(vairable.value.y)})\n`;
             }
         } else if(typeof vairable.value === "number") {
-                code += `#define ${vairable.name} ${toGLSLNumber(vairable.value)}\n`;
+                code += `#define ${vairable.name} ${toGLSLNumber(vairable.value, vairable.type)}\n`;
         }
     }
-    return code;
+    return code+'\n';
 }

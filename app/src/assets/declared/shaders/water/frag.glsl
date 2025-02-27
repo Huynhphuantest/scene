@@ -2,7 +2,6 @@ uniform float uTime;
 varying vec3 vNormal;
 varying vec3 vPosition;
 varying vec3 vUv;
-uniform samplerCube envMap;
 
 // #includes
 
@@ -31,32 +30,14 @@ void main() {
         vNormal
     ) + 1.0) / 2.0, 2.0) * DIFFUSE;
 
-    //FRESNEL & CUBEMAP
-    float fresnel = pow(1.0 - dot(viewVec, vNormal), 2.0);
-    vec3 reflectedVector = reflect(viewVec, vNormal);
-    vec4 reflectedBaseColor = textureCube(envMap, reflectedVector);
-    if(reflectedVector.y < 0.0) reflectedBaseColor = vec4(0.0, 0.0, 0.0, 1.0);
-    vec4 reflectedColor = vec4(
-        pow(reflectedBaseColor.x, MAP_CONTRAST),
-        pow(reflectedBaseColor.y, MAP_CONTRAST),
-        pow(reflectedBaseColor.z, MAP_CONTRAST),
-        1.0
-    );
-
     //SPECULAR (BLINN PHONG)
     vec3 lightReflect = reflect(viewVec, lightToP);
-    float specular = pow(max(dot(lightReflect, vNormal), 0.0), SHININESS) * fresnel * METALIC;
 
 
-    gl_FragColor = mix(
-        vec4(
-            baseColor * pow((
-                diffuse +
-                ambient +
-                specular
-            ), 2.0),
-        1.0),
-        reflectedColor,
-        REFLECTIVITY * fresnel
-    );
+    gl_FragColor = vec4(
+        baseColor * pow((
+            diffuse +
+            ambient
+        ), 2.0),
+    1.0);
 }

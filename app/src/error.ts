@@ -18,5 +18,5 @@ window.addEventListener("error", errorEvent => {
     const err:any = new errConstructor();
     err.message = message;
     err.location = `${fileName} | ${line}`;
-    console.error(err);
+    console.error(JSON.stringify(err));
 });

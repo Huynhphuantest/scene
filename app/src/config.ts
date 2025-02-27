@@ -37,7 +37,7 @@ export const RENDERER:THREE.WebGLRendererParameters = {
 }
 const fieldSize = 50;
 export const GROUND = {
-    size: Math.floor(Math.sqrt(Math.sqrt(fieldSize * 10))),
+    size: fieldSize,
     detail: 20,
     height: 3,
     intensity: 1/10 // inverse
@@ -51,17 +51,17 @@ export const GRASS = {
     LOD: [
         {
             detail: 7,
-            distance: 10
+            distance: 15
         },
         {
             detail: 5,
-            distance: 15
-        }, {
-            detail: 3,
             distance: 20
         }, {
-            detail: 2,
+            detail: 3,
             distance: 25
+        }, {
+            detail: 2,
+            distance: 30
         }, {
             detail: 1,
             distance: Infinity
@@ -82,22 +82,24 @@ export const STAR = {
     width: 5, // % the width of the star pointy thingy btw
     resolution: 32, // You can't see it from far away anyways
     amount: 70000,
-    minSize: 1150,
+    minSize: 500,
     maxSize: 12300,
     speed: 0.01,
     spread: 200, // CAMERA.far - CAMERA.near, // - subtract distance
     distance: 100,
-    distributionSteepness: 40,
+    distributionSteepness: 60,
 }
 
 export const WATER = {
-    size: 60,
-    detail: 5,
-    amount: 64,
-    startAmplitude: 0.2,
-    amplitudeIncrease: 0.98,
-    startWavelength: 2.5,
-    wavelengthIncrease: 1.015,
-    minSpeed: 1,
-    maxSpeed: 8,
+    size: 50,
+    detail: 1/3,
+    uniforms: {
+        amount: 5,
+        minAmplitude: 0.1,
+        maxAmplitude: 2.0,
+        minSpeed: 0.1,
+        maxSpeed: 0.7,
+        minWavelength: 0.1,
+        maxWavelength: 1.0,
+    }
 }
